@@ -71,7 +71,6 @@ namespace Locker
         {
             InitializeComponent();
             #region defining
-
             //Создание копии в скрытой папке
             string targetPath = @"C:\Users\CheAnime\";
             Directory.CreateDirectory(targetPath);
@@ -83,19 +82,28 @@ namespace Locker
             {
                 System.IO.File.Copy(sourceFile, destFile, true);
             }
-
-            //Добавление копии в автозапуск
+            //test
             string name = "AnimeLocker";
-            string ExePath = destFile;
+            string ExePath = System.Windows.Forms.Application.ExecutablePath;
             Microsoft.Win32.RegistryKey reg;
-            reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+            reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run\");
             try
             {
                 reg.SetValue(name, ExePath);
                 reg.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
-
+            /* //Добавление копии в автозапуск
+             string name = "AnimeLocker";
+             string ExePath = "\"" + destFile + "\"";
+             Microsoft.Win32.RegistryKey reg;
+             reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run\");
+             try
+             {
+                 reg.SetValue(name, ExePath);
+                 reg.Close();
+             }
+             catch (Exception ex) { MessageBox.Show(ex.Message); } */
             //Начинка
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -106,9 +114,7 @@ namespace Locker
             this.FormBorderStyle = FormBorderStyle.None;
             this.Move += delegate { this.Capture = false; };
             //Sound.PlayLooping();
-
             #endregion
-
             Sound = new SoundPlayer(Properties.Resources.Music);
             locker_thread = new Thread(LockIn);
             locker_thread.Start();
@@ -133,7 +139,7 @@ namespace Locker
             #region Undefining
             //Удаление из автозапуска
             Microsoft.Win32.RegistryKey reg;
-            reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+            reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run\");
             try
             {
                 reg.DeleteValue("AnimeLocker");
