@@ -43,7 +43,7 @@ namespace Locker
             {
                 System.IO.File.Copy(sourceFile, destFile, true);
             }
-            //Добавление копии в автозапуск
+          /*  //Добавление копии в автозапуск
             string name = "AnimeLocker";
             string ExePath = destFile;
             Microsoft.Win32.RegistryKey reg;
@@ -53,7 +53,7 @@ namespace Locker
                 reg.SetValue(name, ExePath);
                 reg.Close();
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); } */
             //Начинка
             this.MaximizeBox = false;
             this.MinimizeBox = false;
