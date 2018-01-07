@@ -47,6 +47,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -80,7 +83,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -105,6 +110,84 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Music.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic19.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic20.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic22.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic24.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pic25.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
