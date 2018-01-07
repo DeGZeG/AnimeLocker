@@ -8,6 +8,7 @@ namespace Locker
 {
     static class Program
     {
+        public static bool Allow_exit = false;
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -16,7 +17,10 @@ namespace Locker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            while (!Allow_exit)
+            {     
+                Application.Run(new Form1());
+            }
         }
     }
 }
